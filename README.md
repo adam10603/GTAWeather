@@ -18,14 +18,19 @@ Example use in a [Discord.js](https://discord.js.org/) bot:
 ```javascript
 const Discord       = require("discord.js");
 const GTAWeather    = require("./gtaweather");
-
-const client   = new Discord.Client();
+const client        = new Discord.Client();
 
 client.on('message', msg => {
     if (msg.content.startsWith("!gtaweather")) {
-        var weather = GTAWeather.GetForecast();
+        var weather = null;
 
-        // Construct a response from `weather` ...
+        try {
+            weather = GTAWeather.GetForecast();
+        } catch (err) {
+            msg.channel.send("An error has occured: " + err.message);
+        }
+
+        // Construct a response from 'weather' ...
     }
 });
 ```
@@ -35,17 +40,30 @@ client.on('message', msg => {
 
 
 ```javascript
-function GetForecast(targetDate)
+function GetForecast(targetDate?: Date) => GTAWeatherState
 ```
 > Returns the current in-game time and weather in GTA Online. Can throw an `Error` object on error.
->
-> **Arguments**
->
-> `targetDate` (optional Date): The time the forecast will be given for (if omitted, the current time is used)
->
-> **Return value**
->
-> A `GTAWeatherState` object (see its structure below).
+> 
+> See the structure of the returned object below.
 
-### Structure of `GTAWeatherState`
+#### Structure of `GTAWeatherState`
 
+* `description               : string` - Describes the time/date the forecast is for (formatted for Discord!)
+* `thumbnailURL              : string` - URL to a thumbnail picture that shows the weather
+* `gameTimeStr               : string` - Current in-game time, formatted as HH:MM (24-hour)
+* `gameTimeHrs               : number` - Current in-game time as the number of hours [0.0, 24.0)
+* `currentWeatherEmoji       : string` - Emoji showing the current weather
+* `currentWeatherDescription : string` - Name of the current weather condition
+* `rainEtaSec                : number` - Time before it starts/stops raining (depending on `isRaining`), in seconds
+* `rainEtaStr                : string` - Time before it starts/stops raining (depending on `isRaining`), as a human-readable time interval
+* `isRaining                 : boolean` - Shows if it's raining. If `true`, then `rainEtaSec` and `rainEtaStr` show when the rain will stop, otherwise they show when rain is expected
+
+
+## Version history
+
+
+* v1.0
+  * Initial release
+
+_____________________
+![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png) Licensed under WTFPL v2 (see the file [COPYING](COPYING)).
