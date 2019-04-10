@@ -14,8 +14,7 @@ It's intended to be used in Discord bots, but could be used in any Node.js envir
 ## Usage
 
 
-Place `gtaweather.js` next to your main .js file to be able to use it.
-Example use in a [Discord.js](https://discord.js.org/) bot:
+Example use in a [Discord.js](https://discord.js.org/) bot with `gtaweather.js` placed next to the main .js file:
 
 ```javascript
 const Discord       = require("discord.js");
@@ -45,6 +44,7 @@ client.on('message', msg => {
 function GetForecast(targetDate?: Date) => GTAWeatherState
 ```
 > Returns the current in-game time and weather in GTA Online. Can throw an `Error` object on error.
+> `targetDate` is the time the forecast will be given for (if omitted, the current time is used)
 > 
 > See the structure of the returned object below.
 
