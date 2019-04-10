@@ -51,7 +51,7 @@ function GetForecast(targetDate?: Date) => GTAWeatherState
 
 #### Structure of `GTAWeatherState`
 
-* `description : string` - Describes the time/date the forecast is for
+* **`description`** (`string`) - Describes the time/date the forecast is for
 * `thumbnailURL : string` - URL to a thumbnail picture showing the weather
 * `gameTimeHrs : number` - In-game time as the number of hours [0.0, 24.0)
 * `gameTimeStr : string` - In-game time, formatted as HH:MM (24-hour)
