@@ -13,7 +13,7 @@ function makeWeather(name_, emoji_, thumbnailDay_, thumbnailNight_) {
 }
 
 // Weather states
-var weatherState = {
+const weatherState = {
     clear:          makeWeather("Clear",            "☀️", "https://i.imgur.com/LerUU1Z.png", "https://i.imgur.com/waFNkp1.png"),
     rain:           makeWeather("Raining",          "🌧️", "https://i.imgur.com/qsAl41k.png", "https://i.imgur.com/jc98A0G.png"),
     drizzle:        makeWeather("Drizzling",        "🌦️", "https://i.imgur.com/Qx18aHp.png", "https://i.imgur.com/EWSCz5d.png"),
@@ -28,7 +28,7 @@ var weatherState = {
 };
 
 // Weather lookup table
-var weatherStateChanges = [
+const weatherStateChanges = [
     [0,     weatherState.partlyCloudy],
     [4,     weatherState.mist],
     [7,     weatherState.mostlyCloudy],
