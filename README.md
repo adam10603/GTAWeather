@@ -8,6 +8,8 @@
 This Node.js module returns information about the in-game time and weather in GTA Online lobbies for any given time.
 It's intended to be used in Discord bots, but could be used in any Node.js environment.
 
+*Special thanks to Pardonias*
+
 
 ## Usage
 
