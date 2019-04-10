@@ -57,7 +57,7 @@ function GetForecast(targetDate?: Date) => GTAWeatherState
 * `rainEtaSec : number` - Time until it starts/stops raining, in seconds (see `isRaining`)
 * `rainEtaStr : string` - Time until it starts/stops raining, as a human-readable string (see `isRaining`)
 * `isRaining : boolean` - Shows if it's raining.
-  * If `true`, then `rainEtaSec` and `rainEtaStr` show when the rain stops, otherwise they show when rain is expected
+  * If `true`, then `rainEtaSec` and `rainEtaStr` show when the rain stops, otherwise they show when it starts
 
 
 ## Version history

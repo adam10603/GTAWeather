@@ -131,7 +131,7 @@ class GTAWeatherState {
         this.rainEtaStr = rainEtaStr;
         /**
          * Shows if it's raining.
-         * If `true`, then `rainEtaSec` and `rainEtaStr` show when the rain stops, otherwise they show when rain is expected
+         * If `true`, then `rainEtaSec` and `rainEtaStr` show when the rain stops, otherwise they show when it starts
          * @type {boolean}
          */
         this.isRaining = isRaining;
