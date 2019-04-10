@@ -88,50 +88,50 @@ var weatherStateChanges = [
 
 // Return type for GetForecast()
 class GTAWeatherState {
-    constructor(description,thumbnailURL,gameTimeStr,gameTimeHrs,currentWeatherEmoji,currentWeatherDescription,rainEtaSec,rainEtaStr,isRaining) {
+    constructor(description,thumbnailURL,gameTimeHrs,gameTimeStr,currentWeatherEmoji,currentWeatherDescription,rainEtaSec,rainEtaStr,isRaining) {
         /**
          * Describes the time/date the forecast is for (formatted for Discord!)
          * @type {string}
          */
         this.description = description;
         /**
-         * URL to a thumbnail picture that shows the weather
+         * URL to a thumbnail picture showing the weather
          * @type {string}
          */
         this.thumbnailURL = thumbnailURL;
-        /**
-         * Current in-game time, formatted as HH:MM (24-hour)
-         * @type {string}
-         */
-        this.gameTimeStr = gameTimeStr;
         /**
          * Current in-game time as the number of hours [0.0, 24.0)
          * @type {number}
          */
         this.gameTimeHrs = gameTimeHrs;
         /**
-         * Emoji showing the current weather
+         * Current in-game time, formatted as HH:MM (24-hour)
+         * @type {string}
+         */
+        this.gameTimeStr = gameTimeStr;
+        /**
+         * Emoji showing the weather
          * @type {string}
          */
         this.currentWeatherEmoji = currentWeatherEmoji;
         /**
-         * Name of the current weather condition
+         * Name of the weather condition
          * @type {string}
          */
         this.currentWeatherDescription = currentWeatherDescription;
         /**
-         * Time before it starts/stops raining (depending on `isRaining`), in seconds
+         * Time until it starts/stops raining, in seconds (see `isRaining`)
          * @type {number}
          */
         this.rainEtaSec = rainEtaSec;
         /**
-         * Time before it starts/stops raining (depending on `isRaining`), as a human-readable time interval
+         * Time until it starts/stops raining, as a human-readable string (see `isRaining`)
          * @type {string}
          */
         this.rainEtaStr = rainEtaStr;
         /**
          * Shows if it's raining.
-         * If `true`, then `rainEtaSec` and `rainEtaStr` show when the rain will stop, otherwise they show when rain is expected
+         * If `true`, then `rainEtaSec` and `rainEtaStr` show when the rain stops, otherwise they show when rain is expected
          * @type {boolean}
          */
         this.isRaining = isRaining;
@@ -258,8 +258,8 @@ module.exports = {
         return new GTAWeatherState(
             "Forecast for **" + dateToStr(targetDate) + "**" + (currentDate ? " (now)" : ""),
             (isDaytime(gtaTime.gameTimeHrs) ? currentWeather.thumbnailDay : currentWeather.thumbnailNight),
-            gtaTime.gameTimeStr,
             gtaTime.gameTimeHrs,
+            gtaTime.gameTimeStr,
             currentWeather.emoji,
             currentWeather.name,
             rainEta.etaSec,

@@ -48,15 +48,16 @@ function GetForecast(targetDate?: Date) => GTAWeatherState
 
 #### Structure of `GTAWeatherState`
 
-* `description               : string` - Describes the time/date the forecast is for (formatted for Discord!)
-* `thumbnailURL              : string` - URL to a thumbnail picture that shows the weather
-* `gameTimeStr               : string` - Current in-game time, formatted as HH:MM (24-hour)
-* `gameTimeHrs               : number` - Current in-game time as the number of hours [0.0, 24.0)
-* `currentWeatherEmoji       : string` - Emoji showing the current weather
-* `currentWeatherDescription : string` - Name of the current weather condition
-* `rainEtaSec                : number` - Time before it starts/stops raining (depending on `isRaining`), in seconds
-* `rainEtaStr                : string` - Time before it starts/stops raining (depending on `isRaining`), as a human-readable time interval
-* `isRaining                 : boolean` - Shows if it's raining. If `true`, then `rainEtaSec` and `rainEtaStr` show when the rain will stop, otherwise they show when rain is expected
+* `description : string` - Describes the time/date the forecast is for
+* `thumbnailURL : string` - URL to a thumbnail picture showing the weather
+* `gameTimeHrs : number` - In-game time as the number of hours [0.0, 24.0)
+* `gameTimeStr : string` - In-game time, formatted as HH:MM (24-hour)
+* `currentWeatherEmoji : string` - Emoji showing the weather
+* `currentWeatherDescription : string` - Name of the weather condition
+* `rainEtaSec : number` - Time until it starts/stops raining, in seconds (see `isRaining`)
+* `rainEtaStr : string` - Time until it starts/stops raining, as a human-readable string (see `isRaining`)
+* `isRaining : boolean` - Shows if it's raining.
+  * If `true`, then `rainEtaSec` and `rainEtaStr` show when the rain stops, otherwise they show when rain is expected
 
 
 ## Version history
