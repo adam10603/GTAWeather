@@ -41,7 +41,7 @@ client.on('message', msg => {
 
 
 ```javascript
-function GetForecast(targetDate?: Date) => GTAWeatherState
+function GetForecast(targetDate?: Date): GTAWeatherState
 ```
 > Returns the current in-game time and weather in GTA Online. Can throw an `Error` object on error.
 > 
