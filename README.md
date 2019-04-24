@@ -1,5 +1,5 @@
 # GTA Weather
-![Version](https://img.shields.io/badge/Version-1.0-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
+![Version](https://img.shields.io/badge/Version-1.01-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
 
 
 ## Intro
@@ -63,11 +63,19 @@ function GetForecast(targetDate?: Date): GTAWeatherState
   * If `true`, then `rainEtaSec` and `rainEtaStr` show when the rain stops, otherwise they show when it starts
 
 
+## Known issues
+
+
+None, although the `description` field of `GTAWeatherState` is probably subject to change. At the moment it returns something like `Forecast for **24 April 2019 15:18:18 UTC** (now)`. At some point I'll change it so it only returns the date itself with no additional text or Discord-specific formatting (`**`), since all that is better to be done on the caller side.
+
+
 ## Version history
 
 
 * v1.0
   * Initial release
+* v1.01
+  * Fixed incorrect emoji character codes on non-Windows platforms
 
 _____________________
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png) Licensed under WTFPL v2 (see the file [COPYING](COPYING)).
