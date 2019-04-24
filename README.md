@@ -75,7 +75,7 @@ None, although the `description` field of `GTAWeatherState` is probably subject 
 * v1.0
   * Initial release
 * v1.01
-  * Fixed incorrect emoji character codes on non-Windows platforms
+  * Fixed incorrect emojis
 
 _____________________
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png) Licensed under WTFPL v2 (see the file [COPYING](COPYING)).
