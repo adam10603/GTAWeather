@@ -14,17 +14,17 @@ function makeWeather(name_, emoji_, thumbnailDay_, thumbnailNight_) {
 
 // Weather states
 const weatherState = {
-    clear:          makeWeather("Clear",            stripEmojis("☀️"), "https://i.imgur.com/LerUU1Z.png", "https://i.imgur.com/waFNkp1.png"),
-    rain:           makeWeather("Raining",          stripEmojis("🌧️"), "https://i.imgur.com/qsAl41k.png", "https://i.imgur.com/jc98A0G.png"),
-    drizzle:        makeWeather("Drizzling",        stripEmojis("🌦️"), "https://i.imgur.com/Qx18aHp.png", "https://i.imgur.com/EWSCz5d.png"),
-    mist:           makeWeather("Misty",            stripEmojis("🌁"), "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
-    fog:            makeWeather("Foggy",            stripEmojis("🌫️"), "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
-    haze:           makeWeather("Hazy",             stripEmojis("🌫️"), "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"), // 🏭
-    snow:           makeWeather("Snowy",            stripEmojis("❄️"), "https://i.imgur.com/WJEjWM6.png", "https://i.imgur.com/1TxfthS.png"),
-    cloudy:         makeWeather("Cloudy",           stripEmojis("☁️"), "https://i.imgur.com/1oMUp2V.png", "https://i.imgur.com/qSOc8XX.png"),
-    mostlyCloudy:   makeWeather("Mostly cloudy",    stripEmojis("🌥️"), "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"),
-    partlyCloudy:   makeWeather("Partly cloudy",    stripEmojis("⛅"), "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"),
-    mostlyClear:    makeWeather("Mostly clear",     stripEmojis("🌤️"), "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png")
+    clear:          makeWeather("Clear",            "☀️", "https://i.imgur.com/LerUU1Z.png", "https://i.imgur.com/waFNkp1.png"),
+    rain:           makeWeather("Raining",          "🌧", "https://i.imgur.com/qsAl41k.png", "https://i.imgur.com/jc98A0G.png"),
+    drizzle:        makeWeather("Drizzling",        "🌦", "https://i.imgur.com/Qx18aHp.png", "https://i.imgur.com/EWSCz5d.png"),
+    mist:           makeWeather("Misty",            "🌁", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
+    fog:            makeWeather("Foggy",            "🌫", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
+    haze:           makeWeather("Hazy",             "🌫", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
+    snow:           makeWeather("Snowy",            "❄️", "https://i.imgur.com/WJEjWM6.png", "https://i.imgur.com/1TxfthS.png"),
+    cloudy:         makeWeather("Cloudy",           "☁️", "https://i.imgur.com/1oMUp2V.png", "https://i.imgur.com/qSOc8XX.png"),
+    mostlyCloudy:   makeWeather("Mostly cloudy",    "🌥", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"),
+    partlyCloudy:   makeWeather("Partly cloudy",    "⛅", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"), // Emoji could be wrong
+    mostlyClear:    makeWeather("Mostly clear",     "🌤", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png")
 };
 
 // Weather lookup table
@@ -140,10 +140,9 @@ class GTAWeatherState {
 
 // Removes all occurrences of \uFE0F (0xEFB88F) from a string.
 // This is a unicode modifier that Windows puts in emojis that fucks them up on all other platforms.
-// Why would Microsoft follow a standard for once?
-function stripEmojis(text) {
-    return text.replace(/\uFE0F/g, "");
-}
+// function stripEmojis(text) {
+//     return text.replace(/\uFE0F/g, "");
+// }
 
 function secToVerboseInterval(seconds) {
     if (seconds < 60) return "Less than 1 minute";
