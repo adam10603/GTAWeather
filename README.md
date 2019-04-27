@@ -34,6 +34,8 @@ client.on('message', msg => {
         // Construct a response from 'weather' ...
     }
 });
+
+client.login('token');
 ```
 
 
