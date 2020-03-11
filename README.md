@@ -1,5 +1,5 @@
 # GTA Weather
-![Version](https://img.shields.io/badge/Version-1.1-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
+![Version](https://img.shields.io/badge/Version-1.2-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
 
 
 ## Intro
