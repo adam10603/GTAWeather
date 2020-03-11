@@ -1,5 +1,5 @@
 # GTA Weather
-![Version](https://img.shields.io/badge/Version-1.01-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
+![Version](https://img.shields.io/badge/Version-1.1-green.svg) ![License](https://img.shields.io/badge/License-WTFPL%20v2-blue.svg)
 
 
 ## Intro
@@ -22,7 +22,8 @@ const GTAWeather    = require("./gtaweather");
 const client        = new Discord.Client();
 
 client.on('message', msg => {
-    if (msg.content.startsWith("!gtaweather")) {
+    if (msg.content.toLowerCase() == "!gtaweather") {
+        // Getting current weather
         var weather = null;
 
         try {
@@ -31,7 +32,13 @@ client.on('message', msg => {
             msg.channel.send("An error has occured: " + err.message);
         }
 
-        // Construct a response from 'weather' ...
+        // Constructing response
+        msg.channel.send(
+            weather.description + "\n" +
+            "In-game time: " + weather.gameTimeStr + "\n" +
+            "Current weather: " + weather.currentWeatherDescription + " " + weather.currentWeatherEmoji + "\n" +
+            (weather.isRaining ? "Rain is expected to stop in " : "Rain is expected in ") + weather.rainEtaStr
+        );
     }
 });
 
@@ -65,10 +72,10 @@ function GetForecast(targetDate?: Date): GTAWeatherState
   * If `true`, then `rainEtaSec` and `rainEtaStr` show when the rain stops, otherwise they show when it starts
 
 
-## Known issues
+## Notes
 
 
-None, although the `description` field of `GTAWeatherState` is probably subject to change. At the moment it returns something like `Forecast for **24 April 2019 15:18:18 UTC** (now)`. At some point I'll change it so it only returns the date itself with no additional text or Discord-specific formatting (`**`), since all that is better to be done on the caller side.
+The `description` field of `GTAWeatherState` has Discord-specific formatting such as: `Forecast for **24 April 2019 15:18:18 UTC** (now)`. You can just remove `*` characters from the string if you don't need that.
 
 
 ## Version history
@@ -76,8 +83,11 @@ None, although the `description` field of `GTAWeatherState` is probably subject 
 
 * v1.0
   * Initial release
-* v1.01
+* v1.1
   * Fixed incorrect emojis
+* v1.2
+  * Changed sunrise time from 5AM to 6AM
+  * Minor code changes and fixes
 
 _____________________
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png) Licensed under WTFPL v2 (see the file [COPYING](COPYING)).

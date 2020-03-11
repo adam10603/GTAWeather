@@ -1,6 +1,6 @@
 const weatherPeriod     = 384; // Weather period in in-game hours
 const gameHourLength    = 120; // 1 in-game hour in seconds
-const sunriseTime       = 5;   // Time of sunset and sunrise, as in-game hour of day (0-23)
+const sunriseTime       = 6;   // Time of sunset and sunrise, as in-game hour of day
 const sunsetTime        = 21;
 
 function makeWeather(name_, emoji_, thumbnailDay_, thumbnailNight_) {
@@ -138,12 +138,6 @@ class GTAWeatherState {
     }
 }
 
-// Removes all occurrences of \uFE0F (0xEFB88F) from a string.
-// This is a unicode modifier that Windows puts in emojis that fucks them up on all other platforms.
-// function stripEmojis(text) {
-//     return text.replace(/\uFE0F/g, "");
-// }
-
 function secToVerboseInterval(seconds) {
     if (seconds < 60) return "Less than 1 minute";
 
@@ -153,6 +147,7 @@ function secToVerboseInterval(seconds) {
     var ret =
         (hours > 0 ? (hours + (hours > 1 ? " hours " : " hour ")) : "") +
         (minutes > 0 ? (minutes + (minutes > 1 ? " minutes" : " minute")) : "");
+    if (ret.endsWith(" ")) ret = ret.slice(0, -1);
     return ret;
 }
 
@@ -209,19 +204,20 @@ function getWeatherForPeriodTime(periodTime) {
 function getRainEta(periodTime, currentWeather) {
     if (periodTime > weatherPeriod || periodTime < 0) return null;
     var raining = isRaining(currentWeather);
-    var getEta = () => {
-        for (var i = 0; i < weatherStateChanges.length * 2; i++) {
-            var index = i % weatherStateChanges.length;
-            var offset = Math.floor(i / weatherStateChanges.length) * weatherPeriod;
-            if (weatherStateChanges[index][0] + offset >= periodTime) {
-                if (raining ^ isRaining(weatherStateChanges[index][1])) {
-                    return ((weatherStateChanges[index][0] + offset) - periodTime) * gameHourLength;
-                }
+
+    var eta = null;
+
+    for (var i = 0; i < weatherStateChanges.length * 2; i++) {
+        var index = i % weatherStateChanges.length;
+        var offset = Math.floor(i / weatherStateChanges.length) * weatherPeriod;
+        if (weatherStateChanges[index][0] + offset >= periodTime) {
+            if (raining ^ isRaining(weatherStateChanges[index][1])) {
+                eta = ((weatherStateChanges[index][0] + offset) - periodTime) * gameHourLength;
+                break;
             }
         }
-    };
+    }
 
-    var eta = getEta();
     return {
         etaSec:     eta,
         etaStr:     secToVerboseInterval(eta),
@@ -239,12 +235,12 @@ function isDaytime(gameTimeOfDayHrs) {
 
 module.exports = {
     /**
-     * The class holding the information returned by `GetForecast`
+     * Class that holds information about in-game time and weather. This is the return type of `GetForecast`.
      */
     GTAWeatherState: GTAWeatherState,
     /**
      * Returns the current in-game time and weather in GTA Online. Can throw an `Error` object on error
-     * @param {Date} [targetDate] - The time the forecast will be given for (if omitted, the current time is used)
+     * @param {Date} [targetDate] - The time the forecast will be given for (optional, default = current time)
      * @returns {GTAWeatherState}
      */
     GetForecast: function(targetDate) {
@@ -260,7 +256,7 @@ module.exports = {
         if (currentWeather === null) throw new Error("Failed to determine current weather");
         var rainEta = getRainEta(gtaTime.weatherPeriodTime, currentWeather);
         if (rainEta === null) throw new Error("Failed to calculate rain ETA");
-        
+
         return new GTAWeatherState(
             "Forecast for **" + dateToStr(targetDate) + "**" + (currentDate ? " (now)" : ""),
             (isDaytime(gtaTime.gameTimeHrs) ? currentWeather.thumbnailDay : currentWeather.thumbnailNight),
