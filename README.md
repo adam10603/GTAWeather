@@ -65,6 +65,7 @@ function GetForecast(targetDate?: Date): GTAWeatherState
 * **`gameTimeHrs`** *(number)* - In-game time as the number of hours [0.0, 24.0)
 * **`gameTimeStr`** *(string)* - In-game time, formatted as HH:MM (24-hour)
 * **`currentWeatherEmoji`** *(string)* - Emoji showing the weather
+* **`currentWeatherID`** *(number)* - ID of the weather condition
 * **`currentWeatherDescription`** *(string)* - Name of the weather condition
 * **`rainEtaSec`** *(number)* - Time until it starts/stops raining, in seconds (see `isRaining`)
 * **`rainEtaStr`** *(string)* - Time until it starts/stops raining, as a human-readable string (see `isRaining`)
