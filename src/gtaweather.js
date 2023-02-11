@@ -1,9 +1,12 @@
-const weatherPeriod     = 384 // Weather period in in-game hours
-const gameHourLength    = 120 // 1 in-game hour in seconds
-const sunriseTime       = 6   // Time of sunrise, as in-game hour of day
-const sunsetTime        = 21  // Time of sunset, as in-game hour of day
+const weatherPeriod  = 384 // Weather period in in-game hours
+const gameHourLength = 120 // 1 in-game hour in seconds
+const sunriseTime    = 6   // Time of sunrise, as in-game hour of day
+const sunsetTime     = 21  // Time of sunset, as in-game hour of day
 
 const { weathers, listWeather } = require("./weatherStates")
+
+// Importing the translations file
+const { tls } = require("./weather.json")
 
 var weatherState, weatherStateChanges
 
@@ -64,16 +67,16 @@ class GTAWeatherState {
     }
 }
 
-function secToVerboseInterval(seconds) {
-    if (seconds < 60) return "Less than 1 minute"
+function secToVerboseInterval(seconds, language) {
+    if (seconds < 60) return tls[language]["less_one_minute"]
 
     const sMod60  = seconds % 60
     const hours   = Math.floor(seconds / 3600 + (sMod60 / 3600))
     const minutes = Math.floor((seconds - (hours * 3600)) / 60 + (sMod60 / 60))
 
     let ret =
-        (hours > 0 ? (hours + (hours > 1 ? " hours " : " hour ")) : "") +
-        (minutes > 0 ? (minutes + (minutes > 1 ? " minutes" : " minute")) : "")
+        (hours > 0 ? (hours + (hours > 1 ? tls[language]["hours"] : tls[language]["hour"])) : "") +
+        (minutes > 0 ? (minutes + (minutes > 1 ? tls[language]["minutes"] : tls[language]["minute"])) : "")
 
     if (ret.endsWith(" ")) ret = ret.slice(0, -1)
 
@@ -108,14 +111,14 @@ function dateToStr(d) {
 }
 
 function getGtaTimeFromDate(d) {
-    const timestamp           = Math.floor(d.getTime() / 1000.0)
-    const gtaHoursTotal       = timestamp / gameHourLength
-    const gtaHoursDay         = gtaHoursTotal % 24.0
+    const timestamp     = Math.floor(d.getTime() / 1000.0)
+    const gtaHoursTotal = timestamp / gameHourLength
+    const gtaHoursDay   = gtaHoursTotal % 24.0
 
     return {
-        gameTimeHrs:        gtaHoursDay,
-        gameTimeStr:        hrsToHHMM(gtaHoursDay),
-        weatherPeriodTime:  gtaHoursTotal % weatherPeriod
+        gameTimeHrs: gtaHoursDay,
+        gameTimeStr: hrsToHHMM(gtaHoursDay),
+        weatherPeriodTime: gtaHoursTotal % weatherPeriod
     }
 }
 
@@ -135,7 +138,7 @@ function getWeatherForPeriodTime(periodTime) {
     return ret
 }
 
-function getRainEta(periodTime, currentWeather) {
+function getRainEta(periodTime, currentWeather, language) {
     if (periodTime > weatherPeriod || periodTime < 0) return null
 
     let raining = isRaining(currentWeather), eta = null
@@ -154,9 +157,9 @@ function getRainEta(periodTime, currentWeather) {
     }
 
     return {
-        etaSec:     eta,
-        etaStr:     secToVerboseInterval(eta),
-        isRaining:  raining
+        etaSec: eta,
+        etaStr: secToVerboseInterval(eta, language),
+        isRaining: raining
     }
 }
 
@@ -180,6 +183,14 @@ module.exports = {
      */
     GetForecast: function (language, targetDate) {
 
+        // Checking if a language has been set
+        if  (language)
+            language = language.slice(0, 2)
+
+        // Checking if there is a translation for the given language
+        if (!tls[language])
+            language = "en"
+
         // Setting the weathers
         weatherState = weathers(language)
         weatherStateChanges = listWeather(weatherState)
@@ -196,7 +207,7 @@ module.exports = {
         const currentWeather = getWeatherForPeriodTime(gtaTime.weatherPeriodTime)
         if (currentWeather === null) throw new Error("Failed to determine current weather")
 
-        const rainEta = getRainEta(gtaTime.weatherPeriodTime, currentWeather)
+        const rainEta = getRainEta(gtaTime.weatherPeriodTime, currentWeather, language)
         if (rainEta === null) throw new Error("Failed to calculate rain ETA")
 
         return new GTAWeatherState(

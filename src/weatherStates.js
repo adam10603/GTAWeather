@@ -1,3 +1,6 @@
+// Importing the translations file
+const { tls } = require("./weather.json")
+
 function makeWeather(id_, name_, emoji_, thumbnailDay_, thumbnailNight_) {
     return {
         id:             id_,
@@ -14,17 +17,17 @@ module.exports = {
 
         // Weather states
         const weatherState = {
-            clear:          makeWeather(0, "Clear",            "☀️", "https://i.imgur.com/LerUU1Z.png", "https://i.imgur.com/waFNkp1.png"),
-            rain:           makeWeather(1, "Raining",          "🌧️", "https://i.imgur.com/qsAl41k.png", "https://i.imgur.com/jc98A0G.png"),
-            drizzle:        makeWeather(2, "Drizzling",        "🌧️", "https://i.imgur.com/Qx18aHp.png", "https://i.imgur.com/EWSCz5d.png"),
-            mist:           makeWeather(3, "Misty",            "🌁", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
-            fog:            makeWeather(4, "Foggy",            "🌫️", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
-            haze:           makeWeather(5, "Hazy",             "🌫️", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
-            snow:           makeWeather(6, "Snowy",            "❄️", "https://i.imgur.com/WJEjWM6.png", "https://i.imgur.com/1TxfthS.png"),
-            cloudy:         makeWeather(7, "Cloudy",           "☁️", "https://i.imgur.com/1oMUp2V.png", "https://i.imgur.com/qSOc8XX.png"),
-            mostlyCloudy:   makeWeather(8, "Mostly cloudy",    "☁️", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"),
-            partlyCloudy:   makeWeather(9, "Partly cloudy",    "⛅", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"), // Emoji could be wrong
-            mostlyClear:    makeWeather(10, "Mostly clear",    "🌤️", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png")
+            clear:          makeWeather(0, tls[language]["clear"],            "☀️", "https://i.imgur.com/LerUU1Z.png", "https://i.imgur.com/waFNkp1.png"),
+            rain:           makeWeather(1, tls[language]["raining"],          "⛈️", "https://i.imgur.com/qsAl41k.png", "https://i.imgur.com/jc98A0G.png"),
+            drizzle:        makeWeather(2, tls[language]["drizzling"],        "🌧️", "https://i.imgur.com/Qx18aHp.png", "https://i.imgur.com/EWSCz5d.png"),
+            mist:           makeWeather(3, tls[language]["misty"],            "🌁", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
+            fog:            makeWeather(4, tls[language]["foggy"],            "🌫️", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
+            haze:           makeWeather(5, tls[language]["hazy"],             "🌫️", "https://i.imgur.com/mjZwX2A.png", "https://i.imgur.com/Mh1PDXS.png"),
+            snow:           makeWeather(6, tls[language]["snowy"],            "❄️", "https://i.imgur.com/WJEjWM6.png", "https://i.imgur.com/1TxfthS.png"),
+            cloudy:         makeWeather(7, tls[language]["cloudy"],           "☁️", "https://i.imgur.com/1oMUp2V.png", "https://i.imgur.com/qSOc8XX.png"),
+            mostlyCloudy:   makeWeather(8, tls[language]["mostly_cloudy"],    "☁️", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"),
+            partlyCloudy:   makeWeather(9, tls[language]["partly_cloudy"],    "⛅", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"), // Emoji could be wrong
+            mostlyClear:    makeWeather(10, tls[language]["mostly_clear"],    "🌤️", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png")
         }
 
         return weatherState
