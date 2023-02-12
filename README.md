@@ -128,6 +128,9 @@ The `description` field of `GTAWeatherState` has Discord-specific formatting suc
 * v1.2
   * Changed sunrise time from 5AM to 6AM
   * Minor code changes and fixes
+* v1.3
+  * Code tweaks / restructuring
+  * Language support
 
 _____________________
 ![WTFPL](http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png) Licensed under WTFPL v2 (see the file [COPYING](COPYING)).
