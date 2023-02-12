@@ -26,7 +26,7 @@ module.exports = {
             snow:           makeWeather(6, tls[language]["snowy"],            "❄️", "https://i.imgur.com/WJEjWM6.png", "https://i.imgur.com/1TxfthS.png"),
             cloudy:         makeWeather(7, tls[language]["cloudy"],           "☁️", "https://i.imgur.com/1oMUp2V.png", "https://i.imgur.com/qSOc8XX.png"),
             mostlyCloudy:   makeWeather(8, tls[language]["mostly_cloudy"],    "☁️", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"),
-            partlyCloudy:   makeWeather(9, tls[language]["partly_cloudy"],    "⛅", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"), // Emoji could be wrong
+            partlyCloudy:   makeWeather(9, tls[language]["partly_cloudy"],    "⛅", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png"),
             mostlyClear:    makeWeather(10, tls[language]["mostly_clear"],    "🌤️", "https://i.imgur.com/aY4EQhE.png", "https://i.imgur.com/2LIbOFC.png")
         }
 
